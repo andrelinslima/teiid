@@ -16,6 +16,7 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <groupId>com.lgc.dsds</groupId>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>teiid-client</artifactId>
 	<name>Client</name>
