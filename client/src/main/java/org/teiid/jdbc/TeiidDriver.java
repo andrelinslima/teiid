@@ -105,6 +105,7 @@ public class TeiidDriver implements Driver {
         }
         try {
             myConnection = cp.connect(url, info);
+            setSessionVariables(myConnection, info);
         } catch (TeiidSQLException e) {
             logger.log(Level.FINE, "Could not create connection", e); //$NON-NLS-1$
             throw TeiidSQLException.create(e, e.getMessage());
@@ -115,6 +116,18 @@ public class TeiidDriver implements Driver {
         logger.fine(logMsg);
 
         return myConnection;
+    }
+
+    public void setSessionVariables(ConnectionImpl connection, Properties info) throws SQLException {
+        String project = info.getProperty(TeiidURL.CONNECTION.USER_PROJECT);
+        if (project != null){
+            StatementImpl s = connection.createStatement();
+            try {
+                s.execute(String.format("select teiid_session_set('%s', '%s')", TeiidURL.CONNECTION.USER_PROJECT, project)); //$NON-NLS-1$
+            } finally {
+                s.close();
+            }
+        }
     }
 
     public void setLocalProfile(ConnectionProfile embeddedProfile) {

@@ -78,6 +78,7 @@ public class TeiidURL {
 
         public static final String ENCRYPT_REQUESTS = "encryptRequests"; //$NON-NLS-1$;
         public static final String LOGIN_TIMEOUT = "loginTimeout"; //$NON-NLS-1$
+        public static final String USER_PROJECT = "project"; //$NON-NLS-1$
 
     }
 
